@@ -12,12 +12,11 @@ r5d.4xlarge
 Format, and mount the two ephemeral devices like this (note, these are *not* EBS devices):
 
 ```
-sudo mkdir /mnt/zfs
 sudo mkdir /mnt/xfs
 
 mkfs -t xfs
 
-cd /mnt/zfs
+cd /au-zfs
 mkdir data tmp output/auk/all-text output/auk/all-domains output/auk/gephi output/binaries/audio output/binaries/image output/binaries/pdf output/binaries/spreadsheet output/binaries/word-processor output/binaries/presentation-program output/binaries/text output/binaries/video output/df/audio output/df/image output/df/pdf output/df/spreadsheet output/df/word-processor output/df/presentation-program output/df/text output/df/video
 
 cd /mnt/xfs
@@ -27,22 +26,75 @@ mkdir data tmp output/auk/all-text output/auk/all-domains output/auk/gephi outpu
 
 Copy the data up (100-200G of GeoCities WARCs that I'd identify and provide a md5/sha1 inventory) and run 3-5 jobs for each of these (I'd do the 3 standard auk jobs, binary extraction, and dataframe csvs):
 
-```
-/usr/bin/time -o ~/au-benchmark/times/r-xfs-w-xfs-01.txt -v spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --local.dir /mnt/xfs/tmp --packages "io.archivesunleashed:aut:0.18.0" -i r-xfs-w-xfs.scala 2>&1 | tee ~/au-benchmark/logs/r-xfs-w-xfs-01.log
+## AUK
 
-r-xfs-w-xfs-auk.scala
-r-xfs-w-xfs-bin.scala
-r-xfs-w-xfs-df.scala
-r-xfs-w-zfs-auk.scala
-r-xfs-w-zfs-bin.scala
-r-xfs-w-zfs-df.scala
-r-zfs-w-xfs-auk.scala
-r-zfs-w-xfs-bin.scala
-r-zfs-w-xfs-df.scala
-r-zfs-w-zfs-auk.scala
-r-zfs-w-zfs-bin.scala
-r-zfs-w-zfs-df.scala
+### r-xfs-w-xfs
 
+```bash
+/usr/bin/time -o ~/aut-benchmark/times/r-xfs-w-xfs-auk-01.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-xfs-w-xfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-xfs-w-xfs-auk-01.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-xfs-w-xfs-auk-02.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-xfs-w-xfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-xfs-w-xfs-auk-02.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-xfs-w-xfs-auk-03.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-xfs-w-xfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-xfs-w-xfs-auk-03.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-xfs-w-xfs-auk-04.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-xfs-w-xfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-xfs-w-xfs-auk-04.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-xfs-w-xfs-auk-05.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-xfs-w-xfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-xfs-w-xfs-auk-05.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*;
 ```
 
-Then, w/r/t ZFS, I presume we should just do a RAID 0, single device pool, and specifically call that out in the article?
+### r-xfs-w-zfs
+
+```bash
+/usr/bin/time -o ~/aut-benchmark/times/r-xfs-w-zfs-auk-01.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-xfs-w-zfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-xfs-w-zfs-auk-01.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-xfs-w-zfs-auk-02.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-xfs-w-zfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-xfs-w-zfs-auk-02.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-xfs-w-zfs-auk-03.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-xfs-w-zfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-xfs-w-zfs-auk-03.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-xfs-w-zfs-auk-04.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-xfs-w-zfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-xfs-w-zfs-auk-04.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-xfs-w-zfs-auk-05.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-xfs-w-zfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-xfs-w-zfs-auk-05.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*;
+```
+
+### r-zfs-w-zfs
+
+```bash
+/usr/bin/time -o ~/aut-benchmark/times/r-zfs-w-zfs-auk-01.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-zfs-w-zfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-zfs-w-zfs-auk-01.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-zfs-w-zfs-auk-02.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-zfs-w-zfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-zfs-w-zfs-auk-02.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-zfs-w-zfs-auk-03.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-zfs-w-zfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-zfs-w-zfs-auk-03.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-zfs-w-zfs-auk-04.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-zfs-w-zfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-zfs-w-zfs-auk-04.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-zfs-w-zfs-auk-05.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-zfs-w-zfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-zfs-w-zfs-auk-05.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*;
+```
+
+### r-zfs-w-xfs
+
+```bash
+/usr/bin/time -o ~/aut-benchmark/times/r-zfs-w-xfs-auk-01.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-zfs-w-xfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-zfs-w-xfs-auk-01.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-zfs-w-xfs-auk-02.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-zfs-w-xfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-zfs-w-xfs-auk-02.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-zfs-w-xfs-auk-03.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-zfs-w-xfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-zfs-w-xfs-auk-03.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-zfs-w-xfs-auk-04.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-zfs-w-xfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-zfs-w-xfs-auk-04.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*; /usr/bin/time -o ~/aut-benchmark/times/r-zfs-w-xfs-auk-05.txt -v ~/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[16] --driver-memory 125g --conf spark.local.dir=/mnt/xfs/tmp -Djava.io.tmpdir=/mnt/xfs/tmp --jars ~/aut-0.18.0-fatjar.jar -i ~/aut-benchmark/src/main/scala/r-zfs-w-xfs-auk.scala 2>&1 | tee ~/aut-benchmark/logs/r-zfs-w-xfs-auk-05.log; rm -rf /mnt/xfs/aut; cd /mnt/xfs; mkdir -p auk/all-text auk/all-domains auk/gephi; rm -rf /mnt/xfs/tmp/*;
+```
+
+## Binaries
+
+### r-xfs-w-xfs
+
+```bash
+```
+
+### r-xfs-w-zfs
+
+```bash
+```
+
+### r-zfs-w-zfs
+
+```bash
+```
+
+### r-zfs-w-xfs
+
+```bash
+```
+
+
+
+
+## DataFrames
+
+### r-xfs-w-xfs
+
+```bash
+```
+
+### r-xfs-w-zfs
+
+```bash
+```
+
+### r-zfs-w-zfs
+
+```bash
+```
+
+### r-zfs-w-xfs
+
+```bash
+```
