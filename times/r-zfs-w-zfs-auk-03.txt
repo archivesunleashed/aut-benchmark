@@ -1,0 +1,23 @@
+	Command being timed: "/home/ubuntu/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[*] --driver-memory 125g --conf spark.local.dir=/au-zfs/tmp -Djava.io.tmpdir=/au-zfs/tmp --jars /home/ubuntu/aut-0.18.0-fatjar.jar -i /home/ubuntu/aut-benchmark/src/main/scala/r-zfs-w-zfs-auk.scala"
+	User time (seconds): 132492.33
+	System time (seconds): 10750.93
+	Percent of CPU this job got: 662%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 6:00:09
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 47022964
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 2853
+	Minor (reclaiming a frame) page faults: 13270069
+	Voluntary context switches: 1733040762
+	Involuntary context switches: 697916
+	Swaps: 0
+	File system inputs: 1822153028
+	File system outputs: 17644345
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
