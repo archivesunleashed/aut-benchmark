@@ -27,6 +27,9 @@ mkdir -p data tmp output/auk/all-text output/auk/all-domains output/auk/gephi ou
 
 ```
 
+S3 buckets - no versions, no encryption
+
+
 ## Jobs
 
 ### AUK
