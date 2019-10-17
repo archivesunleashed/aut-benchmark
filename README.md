@@ -27,8 +27,14 @@ mkdir -p data tmp output/auk/all-text output/auk/all-domains output/auk/gephi ou
 
 ```
 
-S3 buckets - no versions, no encryption
+## Notes
 
+- XFS
+  - RAID 0
+  - single device pool
+- S3 buckets
+  - no versions
+  - no encryption
 
 ## Jobs
 
