@@ -7,6 +7,7 @@ r5d.4xlarge
   - 16 virtual cores
   - 128G RAM
   - 2 x 300G ephemeral mount points
+  - us-east-1
 ```
 
 ## Setup
@@ -29,12 +30,13 @@ mkdir -p data tmp output/auk/all-text output/auk/all-domains output/auk/gephi ou
 
 ## Notes
 
-- XFS
+- ZFS
   - RAID 0
   - single device pool
 - S3 buckets
   - no versions
   - no encryption
+  - us-east-1
 
 ## Jobs
 
