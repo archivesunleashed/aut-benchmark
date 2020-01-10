@@ -1,0 +1,23 @@
+	Command being timed: "/home/nruest/bin/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[20] --driver-memory 65g --jars /home/nruest/jcdl-experiment/aut-0.18.1-SNAPSHOT-fatjar.jar -i /home/nruest/jcdl-experiment/rdd.scala"
+	User time (seconds): 18693.80
+	System time (seconds): 2068.29
+	Percent of CPU this job got: 297%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:56:18
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 31658584
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 185
+	Minor (reclaiming a frame) page faults: 11289663
+	Voluntary context switches: 348971423
+	Involuntary context switches: 701441
+	Swaps: 0
+	File system inputs: 344774304
+	File system outputs: 570640
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
