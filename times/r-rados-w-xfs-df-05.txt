@@ -1,0 +1,23 @@
+	Command being timed: "/home/ubuntu/spark-2.4.4-bin-hadoop2.7/bin/spark-shell --master local[*] --driver-memory 125g --jars /home/ubuntu/aut-hadoop-2.7.2.jar -i /home/ubuntu/aut-benchmark/src/main/scala/r-rados-w-xfs-df.scala"
+	User time (seconds): 158144.84
+	System time (seconds): 15509.81
+	Percent of CPU this job got: 648%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 7:26:12
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 49951668
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 15690709
+	Voluntary context switches: 2130792213
+	Involuntary context switches: 1167619
+	Swaps: 0
+	File system inputs: 8
+	File system outputs: 175686584
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
