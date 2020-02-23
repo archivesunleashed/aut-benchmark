@@ -8,9 +8,10 @@ sc.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSyste
 sc.hadoopConfiguration.setInt("fs.s3a.connection.maximum", 100)
 sc.hadoopConfiguration.set("fs.s3a.access.key", "")
 sc.hadoopConfiguration.set("fs.s3a.secret.key", "")
+sc.hadoopConfiguration.set("fs.s3a.endpoint", "")
 
 val validPages = RecordLoader
-  .loadArchives("s3a://au-5467/", sc)
+  .loadArchives("s3a://JIMMYLIN-5467/", sc)
   .keepValidPages()
 
 validPages

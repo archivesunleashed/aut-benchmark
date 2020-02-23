@@ -4,13 +4,8 @@ import io.archivesunleashed.matchbox._
 
 sc.setLogLevel("INFO")
 
-sc.hadoopConfiguration.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
-sc.hadoopConfiguration.setInt("fs.s3a.connection.maximum", 100)
-sc.hadoopConfiguration.set("fs.s3a.access.key", "")
-sc.hadoopConfiguration.set("fs.s3a.secret.key", "")
-
 val validPages = RecordLoader
-  .loadArchives("s3a://au-5467/", sc)
+  .loadArchives("/dev/5467/warcs", sc)
   .keepValidPages()
 
 validPages
