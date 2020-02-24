@@ -1,21 +1,21 @@
-	Command being timed: "/store/share/spark/bin/spark-shell --master local[*] --driver-memory 500g --jars /home/ruestn/aut-0.18.0-fatjar.jar -i /home/ruestn/aut-benchmark/src/main/scala/r-s3-w-orca-auk.scala"
-	User time (seconds): 290773.48
-	System time (seconds): 13676.84
-	Percent of CPU this job got: 547%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 15:27:35
+	Command being timed: "/store/share/spark/bin/spark-shell --master local[*] --driver-memory 500g --jars /home/ruestn/aut-0.50.1-SNAPSHOT-fatjar.jar -i /home/ruestn/aut-benchmark/src/main/scala/r-s3-w-orca-auk.scala"
+	User time (seconds): 19938.95
+	System time (seconds): 803.25
+	Percent of CPU this job got: 781%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 44:13.72
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 78403156
+	Maximum resident set size (kbytes): 32191784
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 294280638
-	Voluntary context switches: 838617555
-	Involuntary context switches: 13540805
+	Minor (reclaiming a frame) page faults: 59648030
+	Voluntary context switches: 117990214
+	Involuntary context switches: 740793
 	Swaps: 0
-	File system inputs: 11336
-	File system outputs: 17779096
+	File system inputs: 16
+	File system outputs: 2933856
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0

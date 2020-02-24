@@ -16,11 +16,11 @@ val validPages = RecordLoader
 validPages
   .map(r => ExtractDomainRDD(r.getUrl))
   .countItems()
-  .saveAsTextFile("/dev/5467/all-domains/output")
+  .saveAsTextFile("/store/scratch/nruest/web_archives/winnipeg/5467/all-domains/output")
 
 validPages
   .map(r => (r.getCrawlDate, r.getDomain, r.getUrl, RemoveHTMLRDD(RemoveHTTPHeaderRDD(r.getContentString))))
-  .saveAsTextFile("/dev/5467/all-text/output")
+  .saveAsTextFile("/store/scratch/nruest/web_archives/winnipeg/5467/all-text/output")
 
 val links = validPages
   .map(r => (r.getCrawlDate, ExtractLinksRDD(r.getUrl, r.getContentString)))
@@ -29,6 +29,6 @@ val links = validPages
   .countItems()
   .filter(r => r._2 > 5)
 
-WriteGraph.asGraphml(links, "/dev/5467/gephi/output.graphml")
+WriteGraph.asGraphml(links, "/store/scratch/nruest/web_archives/winnipeg/5467/gephi/output.graphml")
 
 sys.exit

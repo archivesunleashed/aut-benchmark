@@ -1,0 +1,23 @@
+	Command being timed: "/home/ubuntu/spark/bin/spark-shell --master local[*] --driver-memory 120g --jars /home/ubuntu/aut-0.50.1-SNAPSHOT-fatjar.jar -i /home/ubuntu/aut-benchmark/src/main/scala/r-local-w-ec2-auk.scala"
+	User time (seconds): 8002.66
+	System time (seconds): 1342.54
+	Percent of CPU this job got: 1026%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 15:10.02
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 43365424
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 432079904
+	Voluntary context switches: 14649165
+	Involuntary context switches: 238670
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 566016
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
