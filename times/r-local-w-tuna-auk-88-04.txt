@@ -1,0 +1,23 @@
+	Command being timed: "/home/ruestn/spark-2.4.5-bin-hadoop2.7/bin/spark-shell --master local[88] --driver-memory 500g --jars /home/ruestn/aut-0.50.1-SNAPSHOT-fatjar.jar -i /home/ruestn/aut-benchmark/src/main/scala/r-local-w-tuna-auk.scala"
+	User time (seconds): 9390.80
+	System time (seconds): 1015.54
+	Percent of CPU this job got: 1073%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 16:09.62
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 49893096
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 408003118
+	Voluntary context switches: 89707381
+	Involuntary context switches: 354734
+	Swaps: 0
+	File system inputs: 102570505
+	File system outputs: 2929458
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
